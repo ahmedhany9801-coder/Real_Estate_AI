@@ -65,14 +65,10 @@ with st.sidebar:
 
 
 
-
     st.markdown("---")
-    st.markdown("### 👨‍💻 Developer")
-    st.markdown("[💬 WhatsApp](https://wa.me/201284273509)")
+    st.markdown("### social media")
     st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/ahmed-hany-722970415)")
     st.markdown("[📘 Facebook](https://www.facebook.com/share/1BNYGJ2Hib/?mibextid=wwXIfr)")
-    st.markdown("[👾 Github](https://github.com/ahmedhany9801-coder)")
-    st.markdown("[📧 Email](mailto:ahmedhany9801@gmail.com)")
 
 
 #################################
