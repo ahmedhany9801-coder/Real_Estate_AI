@@ -8,3 +8,5 @@ plotly
 joblib
 shap
 groq
+requests
+streamlit-lottie
