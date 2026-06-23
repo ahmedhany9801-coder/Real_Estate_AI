@@ -131,58 +131,58 @@ if page == 'Prediction':
     )
     st.divider()
 ###################################################################################################
-predict_btn = st.button(" Predict House Price", use_container_width=True)
-
-if predict_btn:
-
-    if sqft_living >= sqft_lot:
-        st.error("⚠️ There is a problem : You must make (the Living Area (sqft)) smaller than (the Lot Size (sqft)).")
-
-    else:
-        total_rooms = num_bedrooms + num_bathrooms
-        luxury_score = num_bathrooms / num_bedrooms if num_bedrooms > 0 else 0
-
-        renovation_year = 0
-        years_since_renovation = float(house_age)
-
-        input_df = pd.DataFrame({
-            'house_age': [house_age],
-            'num_bedrooms': [num_bedrooms],
-            'num_bathrooms': [num_bathrooms],
-            'sqft_living': [sqft_living],
-            'sqft_lot': [sqft_lot],
-            'num_floors': [num_floors],
-            'has_pool': [has_pool],
-            'school_rating': [school_rating],
-            'crime_rate': [crime_rate],
-            'renovation_year': [renovation_year],
-            'total_rooms': [total_rooms],
-            'luxury_score': [luxury_score],
-            'years_since_renovation': [years_since_renovation],
-            'neighborhood': [neighborhood],
-            'heating_type': [heating_type],
-            'garage_type': [garage_type],
-            'house_condition': [house_condition]
-        })
-
-        with st.spinner("🏠 Estimating property value..."):
-            time.sleep(3)
-
-
-
-            prediction = model.predict(input_df)[0]
-
-            mae = 19541
-            lower = prediction - mae
-            upper = prediction + mae
-
-            st.session_state['last_prediction'] = prediction
-            st.session_state['lower'] = lower
-            st.session_state['upper'] = upper
-            st.session_state['user_inputs'] = input_df.to_dict('records')[0]
-
-        st.success(f"🏠 Predicted Price: ${prediction:,.0f}")
-        st.info(f"📊 Expected Range: ${lower:,.0f} - ${upper:,.0f}")
+    predict_btn = st.button(" Predict House Price", use_container_width=True)
+    
+    if predict_btn:
+    
+        if sqft_living >= sqft_lot:
+            st.error("⚠️ There is a problem : You must make (the Living Area (sqft)) smaller than (the Lot Size (sqft)).")
+    
+        else:
+            total_rooms = num_bedrooms + num_bathrooms
+            luxury_score = num_bathrooms / num_bedrooms if num_bedrooms > 0 else 0
+    
+            renovation_year = 0
+            years_since_renovation = float(house_age)
+    
+            input_df = pd.DataFrame({
+                'house_age': [house_age],
+                'num_bedrooms': [num_bedrooms],
+                'num_bathrooms': [num_bathrooms],
+                'sqft_living': [sqft_living],
+                'sqft_lot': [sqft_lot],
+                'num_floors': [num_floors],
+                'has_pool': [has_pool],
+                'school_rating': [school_rating],
+                'crime_rate': [crime_rate],
+                'renovation_year': [renovation_year],
+                'total_rooms': [total_rooms],
+                'luxury_score': [luxury_score],
+                'years_since_renovation': [years_since_renovation],
+                'neighborhood': [neighborhood],
+                'heating_type': [heating_type],
+                'garage_type': [garage_type],
+                'house_condition': [house_condition]
+            })
+    
+            with st.spinner("🏠 Estimating property value..."):
+                time.sleep(3)
+    
+    
+    
+                prediction = model.predict(input_df)[0]
+    
+                mae = 19541
+                lower = prediction - mae
+                upper = prediction + mae
+    
+                st.session_state['last_prediction'] = prediction
+                st.session_state['lower'] = lower
+                st.session_state['upper'] = upper
+                st.session_state['user_inputs'] = input_df.to_dict('records')[0]
+    
+            st.success(f"🏠 Predicted Price: ${prediction:,.0f}")
+            st.info(f"📊 Expected Range: ${lower:,.0f} - ${upper:,.0f}")
 
 
 #####################################################################################
