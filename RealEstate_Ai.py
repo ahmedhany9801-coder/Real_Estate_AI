@@ -355,11 +355,12 @@ elif page == 'Data Insight📊':
 ##############################################################################
 
     with st.expander("ℹ️ Model Information"):
-        c1, c2, c3, c4 = st.columns(4)
+        c1, c2, c3, c4, c5 = st.columns(5)
         c1.metric("Model", "XGBoost")
         c2.metric("Test R²", "94.53%")
-        c3.metric("MAE", "$19,541")
-        c4.metric("RMSE", "$24,826")
+        c3.metric("Train R²", "96.23%")
+        c4.metric("MAE", "$19,541")
+        c5.metric("RMSE", "$24,826")
 ##########################################################################################################################
 
 elif page == 'AI Asistant':
