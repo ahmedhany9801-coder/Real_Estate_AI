@@ -70,6 +70,22 @@ with st.sidebar:
     st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/ahmed-hany-722970415)")
     st.markdown("[📘 Facebook](https://www.facebook.com/share/1BNYGJ2Hib/?mibextid=wwXIfr)")
 
+    st.markdown("---")
+    st.markdown("##### How was your experience today? ")
+    rating = st.feedback("stars")
+
+    if rating is not None:
+        st.success(f" Thank you for your rating ({rating + 1} / 5) ⭐")
+        
+
+    feedback_text = st.text_area("We value your feedback", placeholder=" Tell us what you think...")
+
+    if st.button("Submit Feedback "):
+        if feedback_text.strip() == "":
+            st.warning(" Please provide some feedback before submitting .")
+        else:
+            st.success("Thank you! Your feedback has been received successfully. ✅")
+
 
 #################################
 if page == 'Prediction':
@@ -179,6 +195,10 @@ if page == 'Prediction':
     
             st.success(f"🏠 Predicted Price: ${prediction:,.0f}")
             st.info(f"📊 Expected Range: ${lower:,.0f} - ${upper:,.0f}")
+
+            st.success(
+                " Need more insights📊? Use the ( AI Assistant 🔮) to analyze the predicted price and discover the key factors affecting the property's value."
+            )
 
 
 #####################################################################################
