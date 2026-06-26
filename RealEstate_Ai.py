@@ -58,6 +58,7 @@ with st.sidebar:
     )
 
     st.markdown("---")
+    st.image("CALL.png", width='stretch')
     st.markdown("### 📞To contact support")
     st.markdown("[📱 Call: 01284273509](tel:+201284273509)")
     st.markdown("[💬 WhatsApp](https://wa.me/201284273509)")
