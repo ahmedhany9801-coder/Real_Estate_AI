@@ -364,9 +364,7 @@ elif page == 'Data Insight📊':
         c5.metric("RMSE", "$24,826")
 ##########################################################################################################################
 
-
 elif page == 'AI Asistant':
-
     st.subheader(" AI Assistant")
 
     client = Groq(api_key=st.secrets["GROQ_API_KEY"])
@@ -403,7 +401,8 @@ OUTPUT FORMAT (STRICT):
 - Do not restate the question or echo the context back to the user.
 - Write the final answer once, directly, with no duplication or filler.
 """
-   def build_context(predicted_price, lower, upper, user_inputs):
+
+    def build_context(predicted_price, lower, upper, user_inputs):
         neighborhood = user_inputs.get('neighborhood', 'غير محدد')
         house_age = user_inputs.get('house_age', user_inputs.get('age', 'غير محدد'))
         bedrooms = user_inputs.get('num_bedrooms', user_inputs.get('bedrooms', 'غير محدد'))
@@ -448,12 +447,10 @@ PROPERTY DETAILS:
 - Heating Type: {heating}
 - School Rating: {school_rating} / 10
 - Crime Rate: {crime_rate} (lower is safer)
-
 """
 
     def ask_assistant(user_question, predicted_price, lower, upper, user_inputs):
         context = build_context(predicted_price, lower, upper, user_inputs)
-
         response = client.chat.completions.create(
             model="llama-3.1-8b-instant",
             messages=[
@@ -463,14 +460,12 @@ PROPERTY DETAILS:
             temperature=0.3,
             max_tokens=300
         )
-
         return response.choices[0].message.content
 
     if 'last_prediction' not in st.session_state:
         st.warning("You must make a prediction first from the Prediction page.")
     else:
         st.info(f"Your predicted house price: ${st.session_state['last_prediction']:,.0f}")
-
         user_question = st.text_input("Ask about your house price")
 
         if st.button("Ask"):
