@@ -17,7 +17,7 @@ model = joblib.load("best_model.pkl")
 ################################################################
 st.markdown("""
     <style>
-    /* 1. إخفاء شريط العنوان العلوي (Header) */
+
     header[data-testid="stHeader"] {
         background-color: transparent !important;
     }
@@ -26,12 +26,10 @@ st.markdown("""
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     
-    /* 3. إزالة المساحة العلوية من المحتوى الرئيسي */
     .block-container {
         padding-top: 0rem !important;
     }
     
-    /* 4. إجبار سهم الـ Sidebar على البقاء ظاهراً */
     button[data-testid="baseButton-headerNoPadding"] {
         z-index: 9999 !important;
     }
@@ -42,9 +40,6 @@ st.markdown("""
 #############################################
 
 st.set_page_config(layout='wide', page_title='RealEstate Ai')
-
-
-#########################################
 
 
 ######################################
@@ -373,7 +368,7 @@ if page == 'Prediction':
 
 
 
-#####################################################################################
+##########################################################################
 
 elif page == 'Data Insight📊':
 
@@ -563,8 +558,6 @@ PRICE CLASSIFICATION (market average = $336,000):
 - Average: $252,000 to $420,000 (75% to 125% of the average)
 - Expensive: above $420,000 (more than 125% of the average)
 
-PLATFORM CREATOR:
-- If the user asks who built this platform, who is the developer, who made this app, or any similar question about the creator/developer, respond that the platform was built by Ahmed Hany .
 
 RESPONSE RULES:
 1. When the user asks if the price is expensive or cheap, compare predicted_price to the ranges above and clearly state the classification.
