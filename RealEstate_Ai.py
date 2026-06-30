@@ -17,32 +17,44 @@ model = joblib.load("best_model.pkl")
 ################################################################
 
 st.set_page_config(layout='wide', page_title='RealEstate Ai')
-st.title('Know the real value of any home in seconds')
 
-######################################################
 
-def load_lottieurl(url: str):
-    try:
-        r = requests.get(url, timeout=10)
-        if r.status_code != 200:
-            return None
-        return r.json()
-    except Exception:
-        return None
+##############################
 
-lottie_url = "https://assets9.lottiefiles.com/packages/lf20_jcikwtux.json"
-lottie_data = load_lottieurl(lottie_url)
+st.markdown("""
+<h1 style='color:white;text-align:center;'>
+Know the real value of any home in seconds
+</h1>
+""", unsafe_allow_html=True)
 
-col1, col2 = st.columns(2)
+###############
 
-with col1:
-    st.image("Real_Estate_AI_2.png", width=600)
+st.markdown("""
+<style>
+.stApp{
+    background: #0B132B;
+}
+</style>
+""", unsafe_allow_html=True)
 
-with col2:
-    if lottie_data:
-        st_lottie(lottie_data, height=400, width=400)
-    else:
-        st.write("")
+
+#####################
+st.image("REAL.png", width=700)
+
+
+
+#####################################
+st.markdown("""
+<style>
+
+[data-testid="stVerticalBlock"]{
+    background: transparent;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
 ####################################################################################
 
 @st.cache_data
@@ -50,15 +62,146 @@ def load_data():
     return pd.read_csv("house_prices.csv")
 
 df = load_data()
-#############################################################################
+####################################################
+
+
+
+st.markdown("""
+<style>
+
+/* Sidebar Background */
+[data-testid="stSidebar"]{
+    background: linear-gradient(180deg,#0B132B,#1C2541);
+}
+
+/* Navigation Title */
+[data-testid="stSidebar"] label{
+    color:white !important;
+    font-weight:bold;
+}
+
+/* Radio Buttons */
+div[role="radiogroup"] > label{
+    background-color:#3A86FF;
+    color:black !important;
+    padding:12px;
+    border-radius:15px;
+    margin-bottom:10px;
+    border:2px solid #E9C46A;
+    font-weight:600;
+}
+
+/* Hover */###
+div[role="radiogroup"] > label:hover{
+    background-color:#4D96FF;
+}
+
+/* Links */
+[data-testid="stSidebar"] a{
+    color:#F4D35E !important;
+    text-decoration:none;
+}
+
+/* Section Titles */
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] h4,
+[data-testid="stSidebar"] h5{
+    color:white !important;
+}
+
+/* Text Area */
+[data-testid="stSidebar"] textarea{
+    background-color:#F8F9FA !important;
+    color:black !important;
+    border-radius:10px;
+}
+
+/* Placeholder */
+[data-testid="stSidebar"] textarea::placeholder{
+    color:gray !important;
+}
+
+/* Buttons */
+.stButton > button{
+    background-color:#3A86FF;
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.stButton > button:hover{
+    background-color:#4D96FF;
+    color:white;
+}###
+
+/* Horizontal Lines */
+hr{
+    border:1px solid rgba(255,255,255,0.2);
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+##########################
+#عناوين
+st.markdown("""
+<style>
+
+h1, h2, h3, h4, h5, h6 {
+    color: white !important;
+}
+
+
+p {
+    color: white !important;
+}
+
+
+.stSelectbox label,
+.stSlider label,
+.stNumberInput label,
+.stTextInput label,
+.stTextArea label,
+.stRadio label,
+.stToggle label {
+    color: white !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+########################################################
+
 with st.sidebar:
+#################
+
+    st.image("Real_Estate_AI_2.png", use_container_width=True)
+
+    st.markdown("""
+    <h2 style='text-align:center;color:white;'>
+    🏠 Real Estate AI
+    </h2>
+
+    <p style='text-align:center;color:#F4D35E;'>
+    Smart Property Valuation Platform
+    </p>
+    """, unsafe_allow_html=True)
+    
+###################
+
+
+
     page = st.radio(
         "Navigation",
         ['Prediction', 'Data Insight📊', 'AI Asistant']
     )
 
+
+#################
     st.markdown("---")
-    st.image("CALL.png", width='stretch')
+
+    
     st.markdown("### 📞To contact support")
     st.markdown("[📱 Call: 01284273509](tel:+201284273509)")
     st.markdown("[💬 WhatsApp](https://wa.me/201284273509)")
@@ -67,17 +210,13 @@ with st.sidebar:
 
 
     st.markdown("---")
-    st.markdown("### social media")
-    st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/ahmed-hany-722970415)")
-    st.markdown("[📘 Facebook](https://www.facebook.com/share/1BNYGJ2Hib/?mibextid=wwXIfr)")
-
-    st.markdown("---")
     st.markdown("##### How was your experience today? ")
     rating = st.feedback("stars")
 
     if rating is not None:
         st.success(f" Thank you for your rating ({rating + 1} / 5) ⭐")
-        
+###############
+
 
     feedback_text = st.text_area("We value your feedback", placeholder=" Tell us what you think...")
 
@@ -88,9 +227,10 @@ with st.sidebar:
             st.success("Thank you! Your feedback has been received successfully. ✅")
 
 
+
 #################################
 if page == 'Prediction':
-    st.dataframe(df.iloc[409:413])
+
 
     st.subheader("Property Information🏡")
 
@@ -128,36 +268,30 @@ if page == 'Prediction':
         school_rating = df[df['neighborhood']==neighborhood]['school_rating'].median()
         crime_rate = df[df['neighborhood']==neighborhood]['crime_rate'].median()
 
-    #has_pool = int(has_pool)
+
     fig_pool = px.pie(df, names='has_pool', hole=0.5, title='Swimming Pool Distribution')
 
-    school_rating = (
-        df[df['neighborhood'] == neighborhood]
-        ['school_rating']
-        .median()
-    )
 
-    crime_rate = (
-        df[df['neighborhood'] == neighborhood]
-        ['crime_rate']
-        .median()
-    )
     st.divider()
 ###################################################################################################
     predict_btn = st.button(" Predict House Price", use_container_width=True)
-    
+#############################################
+
+
+#########################################
     if predict_btn:
-    
+
         if sqft_living >= sqft_lot:
             st.error("⚠️ There is a problem : You must make (the Living Area (sqft)) smaller than (the Lot Size (sqft)).")
-    
+
         else:
             total_rooms = num_bedrooms + num_bathrooms
             luxury_score = num_bathrooms / num_bedrooms if num_bedrooms > 0 else 0
-    
+
             renovation_year = 0
+            
             years_since_renovation = float(house_age)
-    
+
             input_df = pd.DataFrame({
                 'house_age': [house_age],
                 'num_bedrooms': [num_bedrooms],
@@ -177,36 +311,70 @@ if page == 'Prediction':
                 'garage_type': [garage_type],
                 'house_condition': [house_condition]
             })
-    
+
             with st.spinner("🏠 Estimating property value..."):
                 time.sleep(3)
-    
-    
-    
+
+
+
                 prediction = model.predict(input_df)[0]
-    
+
                 mae = 19541
                 lower = prediction - mae
                 upper = prediction + mae
-    
+
                 st.session_state['last_prediction'] = prediction
                 st.session_state['lower'] = lower
                 st.session_state['upper'] = upper
                 st.session_state['user_inputs'] = input_df.to_dict('records')[0]
-    
+
             st.success(f"🏠 Predicted Price: ${prediction:,.0f}")
             st.info(f"📊 Expected Range: ${lower:,.0f} - ${upper:,.0f}")
+
+            st.markdown("---")
 
             st.success(
                 " Need more insights📊? Use the ( AI Assistant 🔮) to analyze the predicted price and discover the key factors affecting the property's value."
             )
+####################
+    st.markdown("""
+    <div style="
+    text-align:center;
+    padding:25px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.05);
+    ">
+
+    <h4 style="color:white;">
+    Connect With Me
+    </h4>
+
+    <p>
+    💼 <a href="https://www.linkedin.com/in/ahmed-hany-722970415">LinkedIn</a>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+
+    🐙 <a href="https://github.com/ahmedhany9801-coder/Real_Estate_A">GitHub</a>
+    </p>
+
+    </div>
+    """, unsafe_allow_html=True)
+
 
 
 #####################################################################################
+
+
+
+
 elif page == 'Data Insight📊':
-
-    st.subheader(" Data Insights📊")
-
+############################
+    st.markdown("""
+    <h1 style='color:white'>
+    Model Insights 📊
+    </h1>
+    """, unsafe_allow_html=True)
+#######################################
+    
     with st.expander(" Feature Importance ", expanded=False):
         try:
             preprocessor = model.named_steps['pre processing']
@@ -328,6 +496,8 @@ elif page == 'Data Insight📊':
 
         except Exception as err:
             st.error(f"⚠️ Error computing feature importance: {err}")
+    
+
 
 ########################################################################################################
     with st.expander(" Market Insights🏡"):
@@ -336,15 +506,16 @@ elif page == 'Data Insight📊':
         fig1 = px.histogram(df, x='price', nbins=50)
         st.plotly_chart(fig1, use_container_width=True)
 #**************#
-        st.markdown("##### Avg Price by Neighborhood")
 
+        st.markdown("##### Avg Price by Neighborhood")
+        
         avg_neigh = df.groupby('neighborhood')['price'].mean().sort_values(ascending=False)
         colors = ['#1D9E75' if v == avg_neigh.max() else '#185FA5' for v in avg_neigh.values]
         fig2 = px.bar(avg_neigh, color=avg_neigh.index, color_discrete_sequence=colors)
-
-
         st.plotly_chart(fig2, use_container_width=True)
-#************#
+
+
+##############
 
         st.markdown("##### Avg Price by Condition")
         avg_cond = df.groupby('house_condition')['price'].mean().reindex(
@@ -365,6 +536,7 @@ elif page == 'Data Insight📊':
 ##########################################################################################################################
 
 elif page == 'AI Asistant':
+
     st.subheader(" AI Assistant")
 
     client = Groq(api_key=st.secrets["GROQ_API_KEY"])
@@ -381,6 +553,8 @@ PRICE CLASSIFICATION (market average = $336,000):
 - Average: $252,000 to $420,000 (75% to 125% of the average)
 - Expensive: above $420,000 (more than 125% of the average)
 
+PLATFORM CREATOR:
+- If the user asks who built this platform, who is the developer, who made this app, or any similar question about the creator/developer, respond that the platform was built by Ahmed Hany (Elhon).
 
 RESPONSE RULES:
 1. When the user asks if the price is expensive or cheap, compare predicted_price to the ranges above and clearly state the classification.
@@ -399,33 +573,8 @@ OUTPUT FORMAT (STRICT):
 - Do not restate the question or echo the context back to the user.
 - Write the final answer once, directly, with no duplication or filler.
 """
-
     def build_context(predicted_price, lower, upper, user_inputs):
-        neighborhood = user_inputs.get('neighborhood', 'غير محدد')
-        house_age = user_inputs.get('house_age', user_inputs.get('age', 'غير محدد'))
-        bedrooms = user_inputs.get('num_bedrooms', user_inputs.get('bedrooms', 'غير محدد'))
-        bathrooms = user_inputs.get('num_bathrooms', user_inputs.get('bathrooms', 'غير محدد'))
-        living_area = user_inputs.get('sqft_living', user_inputs.get('area', 'غير محدد'))
-        lot_size = user_inputs.get('sqft_lot', user_inputs.get('lot', 'غير محدد'))
-        floors = user_inputs.get('num_floors', user_inputs.get('floors', 'غير محدد'))
-        garage = user_inputs.get('garage_type', user_inputs.get('garage', 'غير محدد'))
-
-        pool_val = user_inputs.get('has_pool', 0)
-        has_pool = 'Yes' if pool_val in [1, 'Yes', 'نعم', True] else 'No'
-
-        condition = user_inputs.get('house_condition', user_inputs.get('condition', 'Good'))
-        heating = user_inputs.get('heating_type', 'Standard')
-
-        try:
-            school_rating = f"{float(user_inputs.get('school_rating', 5.0)):.1f}"
-        except Exception:
-            school_rating = "غير محدد"
-
-        try:
-            crime_rate = f"{float(user_inputs.get('crime_rate', 0.0)):.1f}"
-        except Exception:
-            crime_rate = "غير محدد"
-
+        ...
         return f"""
 PREDICTED PRICE: ${predicted_price:,.0f}
 ERROR RANGE: ${lower:,.0f} - ${upper:,.0f}
@@ -434,21 +583,12 @@ MARKET AVERAGE: $336,000
 PROPERTY DETAILS:
 - Neighborhood: {neighborhood}
 - House Age: {house_age} years
-- Bedrooms: {bedrooms}
-- Bathrooms: {bathrooms}
-- Living Area: {living_area} sqft
-- Lot Size: {lot_size} sqft
-- Floors: {floors}
-- Garage: {garage}
-- Swimming Pool: {has_pool}
-- House Condition: {condition}
-- Heating Type: {heating}
-- School Rating: {school_rating} / 10
-- Crime Rate: {crime_rate} (lower is safer)
+...
 """
 
     def ask_assistant(user_question, predicted_price, lower, upper, user_inputs):
         context = build_context(predicted_price, lower, upper, user_inputs)
+
         response = client.chat.completions.create(
             model="llama-3.1-8b-instant",
             messages=[
@@ -458,12 +598,14 @@ PROPERTY DETAILS:
             temperature=0.3,
             max_tokens=300
         )
+
         return response.choices[0].message.content
 
     if 'last_prediction' not in st.session_state:
         st.warning("You must make a prediction first from the Prediction page.")
     else:
         st.info(f"Your predicted house price: ${st.session_state['last_prediction']:,.0f}")
+
         user_question = st.text_input("Ask about your house price")
 
         if st.button("Ask"):
