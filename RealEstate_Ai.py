@@ -22,7 +22,6 @@ st.markdown("""
         background-color: transparent !important;
     }
     
-    /* 2. إخفاء زر التبديل والخيارات المزعجة إذا أردت صفحة أنظف */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     
