@@ -10,13 +10,30 @@ import requests
 from streamlit_lottie import st_lottie
 import time
 
-##########################################################################
+##########################################################
 
 model = joblib.load("best_model.pkl")
 
 ################################################################
 
 st.set_page_config(layout='wide', page_title='RealEstate Ai')
+st.image("REAL.png", width=700)
+
+#########################################
+st.markdown("""
+    <style>
+   
+    .stAppHeader {
+        display: none;
+    }
+  
+    .main .block-container {
+        padding-top: 0rem;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+######################################
 
 
 st.markdown("""
@@ -36,11 +53,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-#####################
-st.image("REAL.png", width=700)
-
-
-
 #####################################
 st.markdown("""
 <style>
@@ -54,14 +66,6 @@ st.markdown("""
 
 
 ####################################################################################
-
-@st.cache_data
-def load_data():
-    return pd.read_csv("house_prices.csv")
-
-df = load_data()
-####################################################
-
 
 
 st.markdown("""
@@ -169,6 +173,14 @@ p {
 """, unsafe_allow_html=True)
 
 ########################################################
+
+@st.cache_data
+def load_data():
+    return pd.read_csv("house_prices.csv")
+
+df = load_data()
+####################################################
+
 
 with st.sidebar:
 
