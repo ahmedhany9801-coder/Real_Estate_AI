@@ -19,8 +19,6 @@ model = joblib.load("best_model.pkl")
 st.set_page_config(layout='wide', page_title='RealEstate Ai')
 
 
-##############################
-
 st.markdown("""
 <h1 style='color:white;text-align:center;'>
 Know the real value of any home in seconds
@@ -143,8 +141,7 @@ hr{
 </style>
 """, unsafe_allow_html=True)
 
-##########################
-#عناوين
+################
 st.markdown("""
 <style>
 
@@ -174,7 +171,6 @@ p {
 ########################################################
 
 with st.sidebar:
-#################
 
     st.image("Real_Estate_AI_2.png", use_container_width=True)
 
@@ -190,24 +186,18 @@ with st.sidebar:
     
 ###################
 
-
-
     page = st.radio(
         "Navigation",
         ['Prediction', 'Data Insight📊', 'AI Asistant']
     )
 
-
 #################
     st.markdown("---")
 
-    
     st.markdown("### 📞To contact support")
     st.markdown("[📱 Call: 01284273509](tel:+201284273509)")
     st.markdown("[💬 WhatsApp](https://wa.me/201284273509)")
     st.markdown("[📧 Email](mailto:ahmedhany9801@gmail.com)")
-
-
 
     st.markdown("---")
     st.markdown("##### How was your experience today? ")
@@ -225,8 +215,6 @@ with st.sidebar:
             st.warning(" Please provide some feedback before submitting .")
         else:
             st.success("Thank you! Your feedback has been received successfully. ✅")
-
-
 
 #################################
 if page == 'Prediction':
@@ -275,10 +263,7 @@ if page == 'Prediction':
     st.divider()
 ###################################################################################################
     predict_btn = st.button(" Predict House Price", use_container_width=True)
-#############################################
 
-
-#########################################
     if predict_btn:
 
         if sqft_living >= sqft_lot:
@@ -363,11 +348,9 @@ if page == 'Prediction':
 
 #####################################################################################
 
-
-
-
 elif page == 'Data Insight📊':
-############################
+
+    
     st.markdown("""
     <h1 style='color:white'>
     Model Insights 📊
@@ -461,7 +444,7 @@ elif page == 'Data Insight📊':
 
 
 
-###############
+#####
             df_plot = fi_df.head(10).sort_values('Importance %', ascending=True)
 
             fig = px.bar(
