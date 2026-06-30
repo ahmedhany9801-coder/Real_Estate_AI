@@ -556,8 +556,35 @@ OUTPUT FORMAT (STRICT):
 - Do not restate the question or echo the context back to the user.
 - Write the final answer once, directly, with no duplication or filler.
 """
+
     def build_context(predicted_price, lower, upper, user_inputs):
-        ...
+        neighborhood = user_inputs.get('neighborhood', 'Unknown')
+        house_age = user_inputs.get('house_age', user_inputs.get('age', 'Unknown'))
+        bedrooms = user_inputs.get('num_bedrooms', user_inputs.get('bedrooms', 'Unknown'))
+        bathrooms = user_inputs.get('num_bathrooms', user_inputs.get('bathrooms', 'Unknown'))
+        living_area = user_inputs.get('sqft_living', user_inputs.get('area', 'Unknown'))
+        lot_size = user_inputs.get('sqft_lot', user_inputs.get('lot', 'Unknown'))
+        floors = user_inputs.get('num_floors', user_inputs.get('floors', 'Unknown'))
+        garage = user_inputs.get('garage_type', user_inputs.get('garage', 'Unknown'))
+
+        pool_val = user_inputs.get('has_pool', 0)
+        has_pool = 'Yes' if pool_val in [1, 'Yes', True] else 'No'
+
+        condition = user_inputs.get('house_condition', user_inputs.get('condition', 'Good'))
+        heating = user_inputs.get('heating_type', 'Standard')
+
+        try:
+            school_rating = f"{float(user_inputs.get('school_rating', 5.0)):.1f}"
+        except Exception:
+            school_rating = "Unknown"
+
+        try:
+            crime_rate = f"{float(user_inputs.get('crime_rate', 0.0)):.1f}"
+        except Exception:
+            crime_rate = "Unknown"
+
+        years_since_renovation = user_inputs.get('years_since_renovation', 'Unknown')
+
         return f"""
 PREDICTED PRICE: ${predicted_price:,.0f}
 ERROR RANGE: ${lower:,.0f} - ${upper:,.0f}
@@ -566,7 +593,19 @@ MARKET AVERAGE: $336,000
 PROPERTY DETAILS:
 - Neighborhood: {neighborhood}
 - House Age: {house_age} years
-...
+- Bedrooms: {bedrooms}
+- Bathrooms: {bathrooms}
+- Living Area: {living_area} sqft
+- Lot Size: {lot_size} sqft
+- Floors: {floors}
+- Garage: {garage}
+- Swimming Pool: {has_pool}
+- House Condition: {condition}
+- Heating Type: {heating}
+- School Rating: {school_rating} / 10
+- Crime Rate: {crime_rate} (lower is safer)
+- Years Since Renovation: {years_since_renovation}
+
 """
 
     def ask_assistant(user_question, predicted_price, lower, upper, user_inputs):
