@@ -15,6 +15,31 @@ import time
 model = joblib.load("best_model.pkl")
 
 ################################################################
+st.markdown("""
+    <style>
+    /* 1. إخفاء شريط العنوان العلوي (Header) */
+    header[data-testid="stHeader"] {
+        background-color: transparent !important;
+    }
+    
+    /* 2. إخفاء زر التبديل والخيارات المزعجة إذا أردت صفحة أنظف */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    
+    /* 3. إزالة المساحة العلوية من المحتوى الرئيسي */
+    .block-container {
+        padding-top: 0rem !important;
+    }
+    
+    /* 4. إجبار سهم الـ Sidebar على البقاء ظاهراً */
+    button[data-testid="baseButton-headerNoPadding"] {
+        z-index: 9999 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+
+#############################################
 
 st.set_page_config(layout='wide', page_title='RealEstate Ai')
 
